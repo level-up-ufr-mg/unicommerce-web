@@ -8,7 +8,17 @@ export class Produtos {
         this.produtos.push(novo);
     }
 
+    //Retorna uma lista somente para leitura
+    //public lista(): ReadonlyArray<Produto>{
+     //  return this.produtos
+    //}
+
+    public lista(): Array<Produto>{
+        return this.produtos
+     }
+
     public get(): readonly Produto[] {
         return this.produtos;
     }
+    
 }
