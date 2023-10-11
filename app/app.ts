@@ -7,3 +7,5 @@ form.addEventListener('submit', event => {
     event.preventDefault();
     produtoController.adiciona();
 });
+
+//Implementações semana 8
