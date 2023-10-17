@@ -35,15 +35,15 @@ export class Produto {
         return this._categoria;
     }
 
-    public criaDe(nomeString: string, precoNumber: number, descricaoString: string, quantidadeEstoqueNumber: number, categoriaStrng: string){
+    public static criaDe(nomeString: string, precoNumber: string, descricaoString: string, quantidadeEstoqueNumber: string, categoriaStrng: string): Produto{
 
-     //   const nome: string = nomeString;
-     //   const preco: number = parseFloat(precoNumber);
-     //   const descricao: string = descricaoString;
-    //    const quantidade: number = parseInt(quantidadeEstoqueNumber);
-    //    const categoria: string = categoriaStrng;
+        const nome = nomeString;
+        const preco = parseFloat(precoNumber);
+        const descricao = descricaoString;
+        const quantidade = parseInt(quantidadeEstoqueNumber);
+        const categoria = categoriaStrng;
 
-    //    return new Produto(nome, preco, descricao, quantidade, categoria);
+        return new Produto(nome, preco, descricao, quantidade, categoria);
 
 
     }

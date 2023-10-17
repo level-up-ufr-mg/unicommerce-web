@@ -10,24 +10,32 @@ export class ProdutoController {
     private inputDescricao : HTMLInputElement;
     private inputQuantidade : HTMLInputElement;
     private inputCategoria : HTMLInputElement;
-    private produtoView = new ProdutosView('#produtoView');
+    private produtoView = new ProdutosView('#produtoView', true);
     private mensagemView = new MensagemView('#mensagemView');
 
     private produtos: Produtos = new Produtos();
 
     constructor() {
-        this.inputNome = document.querySelector('#nome');
-        this.inputPreco = document.querySelector('#preco');
-        this.inputDescricao = document.querySelector('#descricao');
-        this.inputQuantidade = document.querySelector('#quantidadeEstoque');
-        this.inputCategoria = document.querySelector('#categoria');
+        this.inputNome = document.querySelector('#nome') as HTMLInputElement ;
+        this.inputPreco = document.querySelector('#preco')as HTMLInputElement ;
+        this.inputDescricao = document.querySelector('#descricao')as HTMLInputElement ;
+        this.inputQuantidade = document.querySelector('#quantidadeEstoque')as HTMLInputElement ;
+        this.inputCategoria = document.querySelector('#categoria')as HTMLInputElement ;
         this.produtoView.update(this.produtos);
 
     }
 
     public adiciona(): void {
 
-        const produto = this.criaProduto();
+       // const nome = this.inputNome.value;
+       // const preco = parseFloat(this.inputPreco.value);
+       // const descricao = this.inputDescricao.value;
+       // const quantidade = parseInt(this.inputQuantidade.value);
+       // const categoria = this.inputCategoria.value;
+
+       const produto = this.criaProduto();
+
+        
         this.produtos.add(produto);
         this.limparFormulario();
         this.atualizaView();
@@ -41,9 +49,22 @@ export class ProdutoController {
         const quantidade: number = parseInt(this.inputQuantidade.value);
         const categoria: string =  this.inputCategoria.value;
 
+        
+       if (preco <= 0) {
+        throw new Error("Produto deve possuir um preço maior que 0");
+        }
+
+        if (!categoria.trim()) {
+            throw new Error("Produto deve possuir uma categoria");
+        }
+
+        if (quantidade <= 0) {
+            throw new Error("Quantidade em estoque deve ser maior que 0");
+        }
+
         return new Produto(nome, preco, descricao, quantidade, categoria);
 
-    }
+        }
 
     private limparFormulario(): void {
         // limpar todos os campos do formulário
