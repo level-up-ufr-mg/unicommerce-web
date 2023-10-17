@@ -29,7 +29,7 @@ export class ProdutoController{
     adiciona(): void{
 
         const produto = this.criaProduto();
-        console.log(Produto);
+        console.log(produto);
         this.limparFormulario();
     }
 
