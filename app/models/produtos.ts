@@ -4,11 +4,12 @@ export class Produtos {
 
     private produtos: Produto[] = [];
 
-    public add(novo: Produto): void {
-        this.produtos.push(novo);
+
+    adiciona(produto: Produto) {
+        this.produtos.push(produto);
     }
 
-    public get(): readonly Produto[] {
+    lista(): readonly Produto[] {
         return this.produtos;
     }
 }
