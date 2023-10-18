@@ -13,23 +13,23 @@ export class Produto {
     this._categoria = categoria;
   }
 
-  getNome(): string {
+  get nome(): string {
     return this._nome;
   }
 
-  getPreco(): number {
+  get preco(): number {
     return this._preco;
   }
 
-  getDescricao(): string {
+  get descricao(): string {
     return this._descricao;
   }
 
-  getQuantidadeEstoque(): number {
+  get quantidadeEstoque(): number {
     return this._quantidadeEstoque;
   }
 
-  getCategoria(): string {
+  get categoria(): string {
     return this._categoria;
   }
 

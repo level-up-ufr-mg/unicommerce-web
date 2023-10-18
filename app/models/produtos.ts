@@ -10,7 +10,7 @@ export class Produtos {
     }
 
     //Renderização da lista
-    lista(): ReadonlyArray<Produto>{
+    public lista(): ReadonlyArray<Produto>{
         return this.produtos; 
     }
 
