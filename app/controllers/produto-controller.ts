@@ -1,6 +1,10 @@
 import { Produto } from "../models/produto.js";
+import { Produtos } from "../models/produtos.js";
+import { ProdutosView } from "../views/produtos-view.js";
+import { MensagemView } from "../views/mensagem-view.js";
 
 export class ProdutoController{
+   
 
     private inputId: HTMLInputElement;
     private inputNome: HTMLInputElement;
@@ -8,6 +12,9 @@ export class ProdutoController{
     private inputDescricao: HTMLInputElement;
     private inputQuantidade: HTMLInputElement;
     private inputCategoria: HTMLInputElement;
+    private produtosView = new ProdutosView('#produtosView',true);
+    private mensagemView = new MensagemView('#mensagemView');
+
 
     private id: number;
     private nome: string;
@@ -15,35 +22,39 @@ export class ProdutoController{
     private descricao: string;
     private quantidade: number;
     private categoria: string;
+    public produto: Produto;
+    private  produtos = new Produtos();
+  
 
 
     constructor() {
-        this.inputId = document.querySelector('#id');
-        this.inputNome = document.querySelector('#nome');
-        this.inputPreco = document.querySelector('#preco');
-        this.inputDescricao = document.querySelector('#descricao');
-        this.inputQuantidade = document.querySelector('#quantidade');
-        this.inputCategoria = document.querySelector('#categoria');
+        this.inputId = <HTMLInputElement>document.querySelector('#id');
+        this.inputNome = <HTMLInputElement>document.querySelector('#nome');
+        this.inputPreco = <HTMLInputElement>document.querySelector('#preco');
+        this.inputDescricao = <HTMLInputElement>document.querySelector('#descricao');
+        this.inputQuantidade = <HTMLInputElement>document.querySelector('#quantidade');
+        this.inputCategoria = <HTMLInputElement>document.querySelector('#categoria');
+        //this.produtosView.template
+        this.produtosView.atualizaView(this.produtos);
     }
 
-    adiciona(): void{
+    public adiciona(): void{
 
-        const produto = this.criaProduto();
-        console.log(produto);
+        const produto = Produto.criaProduto(
+            this.inputId.value,
+            this.inputNome.value,
+            this.inputPreco.value,
+            this.inputDescricao.value,
+            this.inputQuantidade.value,
+            this.inputCategoria.value,
+        );
+        this.produtos.adiciona(produto);
         this.limparFormulario();
+        this.atualizaView();
+
     }
 
-    criaProduto(): Produto{
-        const id= parseInt(this.inputId.value);
-        const nome= this.inputNome.value;
-        const preco= parseFloat(this.inputPreco.value);
-        const descricao= this.inputDescricao.value;
-        const quantidade= parseInt(this.inputQuantidade.value);
-        const categoria=this.inputCategoria.value;
-        return new Produto(id, nome, preco, descricao,quantidade,categoria);
-    }
-
-    limparFormulario(): void{
+    private limparFormulario(): void{
         this.inputId.value = '';
         this.inputNome.value = '';
         this.inputPreco.value = '';
@@ -52,4 +63,9 @@ export class ProdutoController{
         this.inputCategoria.value = '';
         this.inputId.focus();
     }
+
+    private atualizaView(): void {
+        this.produtosView.update(this.produtos);
+        this.mensagemView.atualizaView('Produto adicionado com sucesso');
+     }
 }

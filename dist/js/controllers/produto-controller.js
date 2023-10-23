@@ -1,26 +1,26 @@
 import { Produto } from "../models/produto.js";
+import { Produtos } from "../models/produtos.js";
+import { ProdutosView } from "../views/produtos-view.js";
+import { MensagemView } from "../views/mensagem-view.js";
 export class ProdutoController {
     constructor() {
+        this.produtosView = new ProdutosView('#produtosView', true);
+        this.mensagemView = new MensagemView('#mensagemView');
+        this.produtos = new Produtos();
         this.inputId = document.querySelector('#id');
         this.inputNome = document.querySelector('#nome');
         this.inputPreco = document.querySelector('#preco');
         this.inputDescricao = document.querySelector('#descricao');
         this.inputQuantidade = document.querySelector('#quantidade');
         this.inputCategoria = document.querySelector('#categoria');
+        //this.produtosView.template
+        this.produtosView.atualizaView(this.produtos);
     }
     adiciona() {
-        const produto = this.criaProduto();
-        console.log(produto);
+        const produto = Produto.criaProduto(this.inputId.value, this.inputNome.value, this.inputPreco.value, this.inputDescricao.value, this.inputQuantidade.value, this.inputCategoria.value);
+        this.produtos.adiciona(produto);
         this.limparFormulario();
-    }
-    criaProduto() {
-        const id = parseInt(this.inputId.value);
-        const nome = this.inputNome.value;
-        const preco = parseFloat(this.inputPreco.value);
-        const descricao = this.inputDescricao.value;
-        const quantidade = parseInt(this.inputQuantidade.value);
-        const categoria = this.inputCategoria.value;
-        return new Produto(id, nome, preco, descricao, quantidade, categoria);
+        this.atualizaView();
     }
     limparFormulario() {
         this.inputId.value = '';
@@ -30,5 +30,9 @@ export class ProdutoController {
         this.inputQuantidade.value = '';
         this.inputCategoria.value = '';
         this.inputId.focus();
+    }
+    atualizaView() {
+        this.produtosView.update(this.produtos);
+        this.mensagemView.atualizaView('Produto adicionado com sucesso');
     }
 }
