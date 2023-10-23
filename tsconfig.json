@@ -1,9 +1,9 @@
 {
     "compilerOptions": {
-        "outDir": "dist/js",
-        "target": "ES6",
-        "noEmitOnError": true,
+        "outDir": "dist/js",//arquivos transformados em .js
+        "target": "ES6",//configuração de compatibilidade do js com navegadores (ES6 é a mais abrangente)
+        "noEmitOnError": true, //Não permite compilação com erros nos arquivos .ts
         "noImplicitAny": true
     },
-    "include": ["app/**/*"]
+    "include": ["app/**/*"] //origem dos arquivos .ts a serem convertidos em .js
 }
