@@ -3,6 +3,7 @@
         "outDir": "dist/js",
         "target": "ES6",
         "noEmitOnError": true,
+        "moduleResolution": "node",  //Config adicionado fora do curso
         "noImplicitAny": true
     },
     "include": ["app/**/*"]
